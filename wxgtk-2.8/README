@@ -1,0 +1,4 @@
+Packages retrieved from
+https://packages.ubuntu.com/trusty/python-wxgtk2.8
+
+use libpng12-0_1.2.54_amd64.deb (fake package => need to copy lib file in /usr/lib)
