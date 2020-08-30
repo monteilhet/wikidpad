@@ -20,7 +20,7 @@ cat <<'IN' > /usr/local/bin/wikidpad
 #!/bin/bash
 
 cd /opt/wikidpad
-python WikidPad.py $*
+python2 WikidPad.py $*
 IN
 
 chmod 755 /usr/local/bin/wikidpad
