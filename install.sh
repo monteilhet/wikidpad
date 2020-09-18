@@ -2,28 +2,43 @@
 
 # run as root
 
-apt-get update -y
-apt-get install -y python-enchant python-pygments wget unzip whois
+sudo apt-get update -y
+sudo apt-get install -y wget unzip whois # python-enchant python-pygments 
 # apt-get install -y python-wxgtk-2.8
-wxgtk-2.8/install.sh
+SKIP_PYWX=1 wxgtk-2.8/install.sh
 
 URL_WP="https://github.com/WikidPad/WikidPad/archive/WikidPad-2-3-rc02.zip"
 # http://downloads.sourceforge.net/wikidpad/WikidPad-2.2-src.zip
 
-mkdir /opt/wikidpad
+
+
+
+sudo bash -c 'mkdir /opt/wikidpad'
+sudo chown $(id -un): /opt/wikidpad
 cd /opt
 wget -q ${URL_WP} -O /tmp/tmp.zip && unzip /tmp/tmp.zip -d wikidpad && rm /tmp/tmp.zip
 cd  /opt/wikidpad/Wikid*
 mv * ..
 
-cat <<'IN' > /usr/local/bin/wikidpad
+# create pyenv
+cd /opt/wikidpad
+pyenv virtualenv wikidpad 2.7.18
+pyenv local wikidpad
+pip install --upgrade pip
+pip install --upgrade setuptools
+pip install --upgrade wheel
+pip install pyenchant
+pip install Pygments
+
+
+cat <<'IN' | sudo tee /usr/local/bin/wikidpad
 #!/bin/bash
 
 cd /opt/wikidpad
 python2 WikidPad.py $*
 IN
 
-chmod 755 /usr/local/bin/wikidpad
+sudo chmod 755 /usr/local/bin/wikidpad
 # useradd -p $(mkpasswd user) -m -g users user
 
 # git clone resources # done by ansible repos
