@@ -4,13 +4,12 @@
 
 sudo apt-get update -y
 sudo apt-get install -y wget unzip whois # python-enchant python-pygments 
+sudo apt install libcanberra-gtk-module -y # libcanberra-gtk3-module -y
 # apt-get install -y python-wxgtk-2.8
 SKIP_PYWX=1 wxgtk-2.8/install.sh
 
 URL_WP="https://github.com/WikidPad/WikidPad/archive/WikidPad-2-3-rc02.zip"
 # http://downloads.sourceforge.net/wikidpad/WikidPad-2.2-src.zip
-
-
 
 
 sudo bash -c 'mkdir /opt/wikidpad'
@@ -27,7 +26,7 @@ pyenv local wikidpad
 pip install --upgrade pip
 pip install --upgrade setuptools
 pip install --upgrade wheel
-pip install pyenchant
+pip install pyenchant==3.0.0a1
 pip install Pygments
 
 
