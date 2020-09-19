@@ -5,6 +5,7 @@
 sudo apt-get update -y
 sudo apt-get install -y wget unzip whois # python-enchant python-pygments 
 sudo apt install libcanberra-gtk-module -y # libcanberra-gtk3-module -y
+sudo apt install -y libenchant1c2a 
 # apt-get install -y python-wxgtk-2.8
 SKIP_PYWX=1 wxgtk-2.8/install.sh
 
@@ -48,7 +49,7 @@ ln -sf /opt/resources/wikidpad/user_extensions /opt/wikidpad/user_extensions
 
 sed -i "/Delete/s/^/#/" /opt/wikidpad/extensions/KeyBindings.py
 
-user=user
+user=$(id -un)
 color1="sed -i '/tree_bg_color/s/^.*$/tree_bg_color = #e0decf/' /home/${user}/.WikidPad.config"
 color2="sed -i '/html_body_bgcolor/s/^.*$/html_body_bgcolor = #e0decf/' /home/${user}/.WikidPad.config"
 color3="sed -i '/editor_bg_color/s/^.*$/editor_bg_color = #e0decf/' /home/${user}/.WikidPad.config"
@@ -60,7 +61,7 @@ eval $color3
 eval $script
 
 # create Favorites
-cat > "/home/user/.WikidPadGlobals/[FavoriteWikis].wiki" <<IN
+cat > "/home/${user}/.WikidPadGlobals/[FavoriteWikis].wiki" <<IN
 StyleWiki;n;=/home/user/git/wikis/StyleWiki/StyleWiki.wiki
 DevWiki;n;=/home/user/git/wikis/DevWiki/DevWiki.wiki
 SystemWiki;n;=/home/user/git/wikis/SystemWiki/SystemWiki.wiki
