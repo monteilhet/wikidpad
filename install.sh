@@ -7,7 +7,9 @@ sudo apt-get install -y wget unzip whois # python-enchant python-pygments
 sudo apt install libcanberra-gtk-module -y # libcanberra-gtk3-module -y
 sudo apt install -y libenchant1c2a 
 # apt-get install -y python-wxgtk-2.8
-SKIP_PYWX=1 wxgtk-2.8/install.sh
+cd wxgtk-2.8
+SKIP_PYWX=1 ./install.sh
+cd -
 
 URL_WP="https://github.com/WikidPad/WikidPad/archive/WikidPad-2-3-rc02.zip"
 # http://downloads.sourceforge.net/wikidpad/WikidPad-2.2-src.zip
@@ -16,13 +18,13 @@ URL_WP="https://github.com/WikidPad/WikidPad/archive/WikidPad-2-3-rc02.zip"
 sudo bash -c 'mkdir /opt/wikidpad'
 sudo chown $(id -un): /opt/wikidpad
 cd /opt
-wget -q ${URL_WP} -O /tmp/tmp.zip && unzip /tmp/tmp.zip -d wikidpad && rm /tmp/tmp.zip
+wget -q ${URL_WP} -O /tmp/tmp.zip && unzip /tmp/tmp.zip -d wikidpad && rm -f /tmp/tmp.zip
 cd  /opt/wikidpad/Wikid*
 mv * ..
 
 # create pyenv
 cd /opt/wikidpad
-pyenv virtualenv wikidpad 2.7.18
+pyenv virtualenv 2.7.18 wikidpad
 pyenv local wikidpad
 pip install --upgrade pip
 pip install --upgrade setuptools
