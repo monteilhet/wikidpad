@@ -6,22 +6,11 @@ sudo apt-get update -y
 sudo apt-get install -y wget unzip whois # python-enchant python-pygments 
 sudo apt install libcanberra-gtk-module -y # libcanberra-gtk3-module -y
 sudo apt install -y libenchant1c2a 
-# apt-get install -y python-wxgtk-2.8
-cd wxgtk-2.8
-SKIP_PYWX=1 ./install.sh
-cd -
-
-URL_WP="https://github.com/WikidPad/WikidPad/archive/WikidPad-2-3-rc02.zip"
-# http://downloads.sourceforge.net/wikidpad/WikidPad-2.2-src.zip
-
+# apt-get install -y python-wxgtk-2.8  # last avaibility ubuntu 14 trusty
+# use offline backup and pyenv
 
 sudo bash -c 'mkdir /opt/wikidpad'
 sudo chown $(id -un): /opt/wikidpad
-cd /opt
-wget -q ${URL_WP} -O /tmp/tmp.zip && unzip /tmp/tmp.zip -d wikidpad && rm -f /tmp/tmp.zip
-cd  /opt/wikidpad/Wikid*
-mv * ..
-
 # create pyenv
 cd /opt/wikidpad
 pyenv virtualenv 2.7.18 wikidpad
@@ -31,6 +20,18 @@ pip install --upgrade setuptools
 pip install --upgrade wheel
 pip install pyenchant==3.0.0a1
 pip install Pygments
+
+cd wxgtk-2.8
+SKIP_PYWX=1 ./install.sh
+cd -
+
+URL_WP="https://github.com/WikidPad/WikidPad/archive/WikidPad-2-3-rc02.zip"
+# http://downloads.sourceforge.net/wikidpad/WikidPad-2.2-src.zip
+
+cd /opt
+wget -q ${URL_WP} -O /tmp/tmp.zip && unzip /tmp/tmp.zip -d wikidpad && rm -f /tmp/tmp.zip
+cd  /opt/wikidpad/Wikid*
+mv * ..
 
 
 cat <<'IN' | sudo tee /usr/local/bin/wikidpad
