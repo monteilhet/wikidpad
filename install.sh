@@ -37,6 +37,8 @@ cat <<'IN' | sudo tee /usr/local/bin/wikidpad
 #!/bin/bash
 
 cd /opt/wikidpad
+which pyenv || export PATH="/home/user/.pyenv/shims:${PATH}"
+
 python2 WikidPad.py $*
 IN
 
@@ -85,7 +87,8 @@ EnglishWiki;n;=/home/user/git/wikis/Edu/EnglishWiki/EnglishWiki.wiki
 Claranet;n;=/home/user/data/corporates/Claranet/wiki/Claranet.wiki
 IN
 
-cat <<'IN' | sudo tee /usr/share/applications/wikidpad.desktop
+# | sudo tee /usr/share/applications/wikidpad.desktop
+cat <<'IN' > ~/.local/share/applications/wikidpad.desktop
 [Desktop Entry]
 Encoding=UTF-8
 Name=WikidPad
