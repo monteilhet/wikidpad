@@ -51,19 +51,28 @@ ln -sf /opt/resources/wikidpad/user_extensions /opt/wikidpad/user_extensions
 
 sed -i "/Delete/s/^/#/" /opt/wikidpad/extensions/KeyBindings.py
 
-user=$(id -un)
-color1="sed -i '/tree_bg_color/s/^.*$/tree_bg_color = #e0decf/' /home/${user}/.WikidPad.config"
-color2="sed -i '/html_body_bgcolor/s/^.*$/html_body_bgcolor = #e0decf/' /home/${user}/.WikidPad.config"
-color3="sed -i '/editor_bg_color/s/^.*$/editor_bg_color = #e0decf/' /home/${user}/.WikidPad.config"
-script="sed -i '/script_security_level/s/^.*$/script_security_level = 2/' /home/${user}/.WikidPad.config"
+# user=$(id -un)
+# color1="sed -i '/tree_bg_color/s/^.*$/tree_bg_color = #e0decf/' /home/${user}/.WikidPad.config"
+# color2="sed -i '/html_body_bgcolor/s/^.*$/html_body_bgcolor = #e0decf/' /home/${user}/.WikidPad.config"
+# color3="sed -i '/editor_bg_color/s/^.*$/editor_bg_color = #e0decf/' /home/${user}/.WikidPad.config"
+# script="sed -i '/script_security_level/s/^.*$/script_security_level = 2/' /home/${user}/.WikidPad.config"
 
-eval $color1
-eval $color2
-eval $color3
-eval $script
+# eval $color1
+# eval $color2
+# eval $color3
+# eval $script
+
+WIKIDPAD_CONFIG="/home/$(id -un)/.WikidPad.config"
+if [[ -f $WIKIDPAD_CONFIG ]] ; then
+sed -i '/tree_bg_color/s/^.*$/tree_bg_color = #e0decf/' $WIKIDPAD_CONFIG
+sed -i '/html_body_bgcolor/s/^.*$/html_body_bgcolor = #e0decf/' $WIKIDPAD_CONFIG
+sed -i '/editor_bg_color/s/^.*$/editor_bg_color = #e0decf/' $WIKIDPAD_CONFIG
+sed -i '/script_security_level/s/^.*$/script_security_level = 2/' $WIKIDPAD_CONFIG
+Favorites
 
 # create Favorites
-cat > "/home/${user}/.WikidPadGlobals/[FavoriteWikis].wiki" <<IN
+mkdir -p "/home/$(id -un)/.WikidPadGlobals"
+cat > "/home/$(id -un)/.WikidPadGlobals/[FavoriteWikis].wiki" <<IN
 StyleWiki;n;=/home/user/git/wikis/StyleWiki/StyleWiki.wiki
 DevWiki;n;=/home/user/git/wikis/DevWiki/DevWiki.wiki
 SystemWiki;n;=/home/user/git/wikis/SystemWiki/SystemWiki.wiki
@@ -74,4 +83,17 @@ OrangeLabs;n;=/home/user/data/corporates/OrangeLabs/oln/OrangeLabs.wiki
 MaisonWiki;n;=/home/user/git/wikis/Perso/MaisonWiki/MaisonWiki.wiki
 EnglishWiki;n;=/home/user/git/wikis/Edu/EnglishWiki/EnglishWiki.wiki
 Claranet;n;=/home/user/data/corporates/Claranet/wiki/Claranet.wiki
+IN
+
+cat <<'IN' | sudo tee /usr/share/applications/wikidpad.desktop
+[Desktop Entry]
+Encoding=UTF-8
+Name=WikidPad
+Comment=WikidPad application
+Exec=wikidpad
+Icon=/opt/wikidpad/Wikidpad_128x128x32.png
+Terminal=false
+Type=Application
+Categories=GNOME;Application;
+StartupNotify=true
 IN
