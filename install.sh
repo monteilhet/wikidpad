@@ -20,10 +20,11 @@ pip install --upgrade setuptools
 pip install --upgrade wheel
 pip install pyenchant==3.0.0a1
 pip install Pygments
+cd -
 
 cd wxgtk-2.8
 SKIP_PYWX=1 ./install.sh
-cd -
+cd /opt/wikidpad
 
 URL_WP="https://github.com/WikidPad/WikidPad/archive/WikidPad-2-3-rc02.zip"
 # http://downloads.sourceforge.net/wikidpad/WikidPad-2.2-src.zip
@@ -71,7 +72,7 @@ sed -i '/tree_bg_color/s/^.*$/tree_bg_color = #e0decf/' $WIKIDPAD_CONFIG
 sed -i '/html_body_bgcolor/s/^.*$/html_body_bgcolor = #e0decf/' $WIKIDPAD_CONFIG
 sed -i '/editor_bg_color/s/^.*$/editor_bg_color = #e0decf/' $WIKIDPAD_CONFIG
 sed -i '/script_security_level/s/^.*$/script_security_level = 2/' $WIKIDPAD_CONFIG
-Favorites
+fi
 
 # create Favorites
 mkdir -p "/home/$(id -un)/.WikidPadGlobals"

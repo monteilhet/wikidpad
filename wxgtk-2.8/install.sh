@@ -4,7 +4,8 @@
 # sudo dpkg -i libpng12-0_1.2.54-1ubuntu1_amd64.deb
 # use libpng12 fake package to avoid dependencies breaking and copy libraries 
 sudo dpkg -i libpng12-0_1.2.54_amd64.deb
-sudo cp libpng12.so* /usr/lib/x86_64-linux-gnu
+sudo cp libpng12.so.0.54.0 /usr/lib/x86_64-linux-gnu
+sudo ln -s /usr/lib/x86_64-linux-gnu/libpng12.so.0.54.0 /usr/lib/x86_64-linux-gnu/libpng12.so.0
 sudo dpkg -i libwxbase2.8-0_2.8.12.1+dfsg2-ppa1~ubuntu16.04.1_amd64.deb
 sudo dpkg -i libwxgtk2.8-0_2.8.12.1+dfsg2-ppa1~ubuntu16.04.1_amd64.deb
 sudo dpkg -i libgstreamer0.10-0_0.10.36-1.5ubuntu1_amd64.deb
