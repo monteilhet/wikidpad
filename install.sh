@@ -13,6 +13,8 @@ sudo bash -c 'mkdir /opt/wikidpad'
 sudo chown $(id -un): /opt/wikidpad
 # create pyenv
 cd /opt/wikidpad
+# require pyenv 2.7.18 installed
+if ! pyenv versions | grep 2.7.18$ ; then "pyenv 2.7.18 not found" ; exit 1 ; fi
 pyenv virtualenv 2.7.18 wikidpad
 pyenv local wikidpad
 pip install --upgrade pip
