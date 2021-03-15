@@ -3,9 +3,9 @@
 # run as root
 
 sudo apt-get update -y
-sudo apt-get install -y wget unzip whois # python-enchant python-pygments 
+sudo apt-get install -y wget unzip whois # python-enchant python-pygments
 sudo apt install libcanberra-gtk-module -y # libcanberra-gtk3-module -y
-sudo apt install -y libenchant1c2a 
+sudo apt install -y libenchant1c2a
 # apt-get install -y python-wxgtk-2.8  # last avaibility ubuntu 14 trusty
 # use offline backup and pyenv
 
@@ -14,7 +14,7 @@ sudo chown $(id -un): /opt/wikidpad
 # create pyenv
 cd /opt/wikidpad
 # require pyenv 2.7.18 installed
-if ! pyenv versions | grep 2.7.18$ ; then "pyenv 2.7.18 not found" ; exit 1 ; fi
+if ! pyenv versions | grep 2.7.18$ ; then echo "pyenv 2.7.18 not found" ; exit 1 ; fi
 pyenv virtualenv 2.7.18 wikidpad
 pyenv local wikidpad
 pip install --upgrade pip
@@ -37,13 +37,13 @@ cd  /opt/wikidpad/Wikid*
 mv * ..
 
 
-cat <<'IN' | sudo tee /usr/local/bin/wikidpad
+cat <<IN | sudo tee /usr/local/bin/wikidpad
 #!/bin/bash
 
 cd /opt/wikidpad
-which pyenv || export PATH="/home/user/.pyenv/shims:${PATH}"
+which pyenv || export PATH="/home/$(id -un)/.pyenv/shims:\${PATH}"
 
-python2 WikidPad.py $*
+python2 WikidPad.py \$*
 IN
 
 sudo chmod 755 /usr/local/bin/wikidpad
@@ -79,16 +79,18 @@ fi
 # create Favorites
 mkdir -p "/home/$(id -un)/.WikidPadGlobals"
 cat > "/home/$(id -un)/.WikidPadGlobals/[FavoriteWikis].wiki" <<IN
-StyleWiki;n;=/home/user/git/wikis/StyleWiki/StyleWiki.wiki
-DevWiki;n;=/home/user/git/wikis/DevWiki/DevWiki.wiki
-SystemWiki;n;=/home/user/git/wikis/SystemWiki/SystemWiki.wiki
-PersoWiki;n;=/home/user/git/wikis/Perso/PersoWiki/PersoWiki.wiki
-JobWiki;n;=/home/user/git/wikis/JobWiki/JobWiki.wiki
-CuisineWiki;n;=/home/user/git/wikis/Perso/CuisineWiki/CuisineWiki.wiki
-OrangeLabs;n;=/home/user/data/corporates/OrangeLabs/oln/OrangeLabs.wiki
-MaisonWiki;n;=/home/user/git/wikis/Perso/MaisonWiki/MaisonWiki.wiki
-EnglishWiki;n;=/home/user/git/wikis/Edu/EnglishWiki/EnglishWiki.wiki
-Claranet;n;=/home/user/data/corporates/Claranet/wiki/Claranet.wiki
+StyleWiki;n;=/home/$(id -un)/git/wikis/StyleWiki/StyleWiki.wiki
+DevWiki;n;=/home/$(id -un)/git/wikis/DevWiki/DevWiki.wiki
+SystemWiki;n;=/home/$(id -un)/git/wikis/SystemWiki/SystemWiki.wiki
+PersoWiki;n;=/home/$(id -un)/git/wikis/Perso/PersoWiki/PersoWiki.wiki
+JobWiki;n;=/home/$(id -un)/git/wikis/JobWiki/JobWiki.wiki
+CuisineWiki;n;=/home/$(id -un)/git/wikis/Perso/CuisineWiki/CuisineWiki.wiki
+OrangeLabs;n;=/home/$(id -un)/data/corporates/OrangeLabs/oln/OrangeLabs.wiki
+MaisonWiki;n;=/home/$(id -un)/git/wikis/Perso/MaisonWiki/MaisonWiki.wiki
+EnglishWiki;n;=/home/$(id -un)/git/wikis/Edu/EnglishWiki/EnglishWiki.wiki
+Kast;n;=/home/$(id -un)/git/wikis/Corporate/Thales/Kast/Kast.wiki
+MDS;n;=/home/$(id -un)/git/wikis/Corporate/Thales/MDS/MDS.wiki
+Claranet;n;=/home/$(id -un)/git/Wikis/Corporate/Claranet/wiki/Claranet.wiki
 IN
 
 # | sudo tee /usr/share/applications/wikidpad.desktop
