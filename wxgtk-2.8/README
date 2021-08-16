@@ -1,4 +1,17 @@
 Packages retrieved from
 https://packages.ubuntu.com/trusty/python-wxgtk2.8
 
-use libpng12-0_1.2.54_amd64.deb (fake package => need to copy lib file in /usr/lib)
+dependencies : libpng12-0
+
+H1 use ppa with libpng12-0 rebuilt package
+
+cf https://www.linuxuprising.com/2018/05/fix-libpng12-0-missing-in-ubuntu-1804.html
+install libpng by using a PPA created with an updated libpng12-0 package
+ (http://ppa.launchpad.net/linuxuprising/libpng12/ubuntu/pool/main/libp/libpng/)
+
+sudo add-apt-repository ppa:linuxuprising/libpng12
+sudo apt update
+sudo apt install libpng12-0
+
+H2 use fake pacakge (NB no more compatible with ubuntu hisrute hippo conflict with usrmerge package)
+use libpng12-0_1.2.54_amd64.deb (fake package => need to copy lib file in /usr/lib

@@ -25,7 +25,7 @@ pip install Pygments
 cd -
 
 cd wxgtk-2.8
-SKIP_PYWX=1 ./install.sh
+./install.sh
 cd /opt/wikidpad
 
 URL_WP="https://github.com/WikidPad/WikidPad/archive/WikidPad-2-3-rc02.zip"
