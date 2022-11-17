@@ -1,6 +1,9 @@
 #!/bin/bash
 
-sudo add-apt-repository ppa:linuxuprising/libpng12
+# sudo add-apt-repository ppa:linuxuprising/libpng12
+# impish latest version available for libpng12
+sudo bash -c "echo 'deb https://ppa.launchpadcontent.net/linuxuprising/libpng12/ubuntu/ impish main' > /etc/apt/sources.list.d/linuxuprising-ubuntu-libpng12-kinetic.list"
+
 sudo apt update
 sudo apt install libpng12-0 -y
 sudo dpkg -i libwxbase2.8-0_2.8.12.1+dfsg2-ppa1~ubuntu16.04.1_amd64.deb
